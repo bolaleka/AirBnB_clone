@@ -21,9 +21,11 @@ class BaseModel:
     def __str__(self):
         """String Manioulation"""
         self.__dict__.update({"updated_at": BaseModel.updated_at})
+        self.__dict__.update({"id": BaseModel.id})
+        self.__dict__.update({"created_at": BaseModel.created_at})
 
         return '[' + self.__class__.__name__ + '] ' + '(' + self.id + ') ' \
-               + str(dict(sorted(self.__dict__.items())))
+               + str(dict(self.__dict__.items()))
 
     def save(self):
         """Upadte with public instance attribute"""
