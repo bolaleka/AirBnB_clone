@@ -21,10 +21,15 @@ class BaseModel:
         self.upadated_at = self.created_at
 
         if kwargs is not None:
-            self.id = self.id
-            self.created_at = self.created_at
+            f = "%Y-%m-%dT%H:%M:%S.%f"
+            for key, value in kwargs.items():
+                if key == 'created_at' or key == 'updated_at':
+                    value = datetime.strptime(kwargs[key], f)
+                if key != '__class__':
+                    setattr(self, key, value)
         else:
             id = str(uuid.uuid4())
+            created_at = datetime.now()
 
     def __str__(self):
         """String Manioulation"""
