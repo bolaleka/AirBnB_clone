@@ -4,12 +4,12 @@
 import cmd
 
 
-class Console(cmd.Cmd):
+class HBNBCommand(cmd.Cmd):
     """Console class to maange object
     """
 
-    intro = '\n   ###############################\n   \
-            #\tWelcome to AirBnb Clone  #\n   \
+    intro = '\n   ###############################\n\
+            #\tWelcome to AirBnb Clone  #\n\
             ###############################\n'
     prompt = '(hbnb) '
 
@@ -18,12 +18,13 @@ class Console(cmd.Cmd):
         return True
 
     def do_quit(self, line):
-        """Quit"""
+        """Quit command to exit the  program\n"""
         return True
 
-    def postloop(self):
-        print
+    def emptyline(self):
+        """configure empty command"""
+        pass
 
 
 if __name__ == '__main__':
-    Console().cmdloop()
+    HBNBCommand().cmdloop()
