@@ -2,7 +2,7 @@
 """Defoine basemodel class"""
 import uuid
 from datetime import datetime
-import json
+import models
 
 
 class BaseModel:
@@ -45,11 +45,6 @@ class BaseModel:
         """ returns a dictionary containing all keys/values
             of __dict__ of the instance
         """
-        """render_dic = self.__dict__.copy
-        render_dic["created_at"] = self.created_at.isoformat()
-        render_dic["updated_at"] = self.updated_at.isoformat()
-        render_dic["__class__"] = self.__class__.__.name__
-        return render_dic"""
         new_dict = {}
         for key, values in self.__dict__.items():
             if key == "created_at" or key == "updated_at":
