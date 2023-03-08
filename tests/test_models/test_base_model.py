@@ -15,11 +15,8 @@ class TestBaseModel(unittest.TestCase):
 
     def test_save(self):
         """Test if save method exist"""
-        try:
-            if type(BaseModel()).save.__name__ == "save":
-                return "OK"
-        except:
-            print("No file")
+
+        self.assertTrue(type(BaseModel()).save.__name__, "save")
 
 if __name__ == '__main__':
     unittest.main()
