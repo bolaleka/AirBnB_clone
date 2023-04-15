@@ -12,16 +12,34 @@ from models.base_model import BaseModel
 class TestBaseModel(unittest.TestCase):
     """Unittest cases instance"""
 
-    def test_attributes(self):
-        """Test unique id"""
+    def test_init(self):
+        """Test __init__ attribute and argument"""
 
-        b = BaseModel()
-        self.assertTrue(hasattr(b, "id"))
-        self.assertTrue(hasattr(b, "created_at"))
-        self.assertTrue(hasattr(b, "updated_at"))
-	self.assertEqual(type(b.id), str)
-	self.assertEqual(type(b.created_at), datetime)
-	self.assertEqual(type(b.updated_at), datetime)
+        model = BaseModel()
+        self.assertIsInstance(model, BaseModel)
+        self.assertIsInstance(model.id, str)
+        self.assertGreater(len(model.id), 0)
+        self.assertIsInstance(model.created_at, datetime)
+        self.assertIsInstance(model.updated_at, datetime)
+
+        model_2 = BaseModel()
+        self.assertNotEqual(model.id, model_2.id)
+
+        kwargs = {
+            'id': '1234',
+            'created_at': '2022-04-15T12:00:00.000000',
+            'updated_at': '2022-04-15T13:00:00.000000',
+            'name': 'test',
+            'value': 10
+        }
+        model_3 = BaseModel(**kwargs)
+        self.assertIsInstance(model_3, BaseModel)
+        self.assertEqual(model_3.id, '1234')
+        self.assertEqual(model_3.created_at, datetime(2022, 4, 15, 12, 0))
+        self.assertEqual(model_3.updated_at, datetime(2022, 4, 15, 13, 0))
+        self.assertEqual(model_3.name, 'test')
+        self.assertEqual(model_3.value, 10)
+
 
     def test_save(self):
         """Test if save method exist"""
